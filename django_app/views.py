@@ -7,9 +7,18 @@ from rest_framework.response import Response
 from django_app import models
 from django.core.paginator import Paginator
 from django_app import serializers
+from pathlib import Path
+from django.conf import settings
 
 def index(request):
-    return JsonResponse({"response": "Ok!"})
+
+    file_exists = Path(settings.BASE_DIR / 'frontend/build/index.html').exists()
+    print(f"Файл существует: {file_exists}")
+
+    context={}
+
+    print("index")
+    return render(request=request, template_name = 'index.html', context=context, status=status.HTTP_200_OK)
 
 def users(request):
     return JsonResponse({"response": "Ok!"})

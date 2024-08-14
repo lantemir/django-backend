@@ -143,15 +143,21 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-#раскоментить при collectStatic
-# STATIC_ROOT = 'static'
+ # раскоментить при сборке на прод и делаем:  python manage.py collectstatic --noinput
+#STATIC_ROOT = Path(BASE_DIR / 'static')  
 
 STATICFILES_DIRS = [
-    'static_external',
-    'frontend/build/static',
-    'public/build/static',
-    'static', #закоментить при collecstatic
+    Path(BASE_DIR / 'static_external'),
+    Path(BASE_DIR / 'static'), #закоментить при колект статике и проме
+    Path(BASE_DIR / 'frontend/build/static'),
+    Path(BASE_DIR / 'frontend/public/static'),
 ]
+
+MEDIA_URL = 'media/'
+#MEDIA_ROOT = Path(BASE_DIR, 'static_external/media')
+MEDIA_ROOT = Path(BASE_DIR, 'static/media')
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000000
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
